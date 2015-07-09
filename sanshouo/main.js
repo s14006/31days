@@ -8,6 +8,16 @@ ga.oo3 = {
 	,image:"oo3.png"
 	,width:47
 };
+ga.kassha = {
+	height:100
+	,image:"kassha.png"
+	,width:100
+};
+ga.dai = {
+	height:80
+	,image:"dai.png"
+	,width:50
+};
 
 var eSprite = enchant.Class.create(enchant.Sprite,{
 	initialize:function(asset) {
@@ -26,6 +36,27 @@ var Oo3 = enchant.Class.create(eSprite,{
 	}
 });
 
+var Kassha = enchant.Class.create(eSprite,{
+	initialize:function() {
+		eSprite.call(this,ga.kassha);
+		this.x = 95;
+		this.y = 157;
+	}
+
+	,onenterframe:function() {
+		this.rotate(3);
+	}
+});
+
+var Dai = enchant.Class.create(eSprite,{
+	initialize:function() {
+		eSprite.call(this,ga.dai);
+		this.x = 120;
+		this.y = 190;
+	}
+});
+
+/* 今回は使わなかった(´・ω・｀)
 var Player = enchant.Class.create(Oo3,{
 	initialize:function() {
 		Oo3.call(this);
@@ -40,16 +71,20 @@ var Player = enchant.Class.create(Oo3,{
 	}
 });
 
+*/
+
 
 window.onload = function() {
 	game = new Core(gs.width, gs.height);
 	game.fps = gs.fps;
-	game.preload(ga.oo3.image);
+	game.preload(ga.oo3.image,ga.kassha.image,ga.dai.image);
 	stage = game.rootScene;
 
 	game.onload = function() {
 
-		var player = new Player();
+		var dai = new Dai();
+		var kassha = new Kassha();
+		var oo3 = new Oo3();
 
 	};
 
