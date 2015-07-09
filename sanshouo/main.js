@@ -4,33 +4,17 @@ var gs = {fps:30, height:320, width:320};
 
 var ga = {};
 
-ga.background = {
-	height:320
-	,image:"background.png"
-	,width:320
-};
+ga.background = {height:320, image:"background.png", width:320};
 
-ga.oo3 = {
-	height:32
-	,image:"oo3.png"
-	,width:47
-};
+ga.oo3 = {height:32, image:"oo3.png", width:47};
 
-ga.pulley = {
-	height:100
-	,image:"pulley.png"
-	,width:100
-};
+ga.pulley = {height:100, image:"pulley.png", width:100};
 
-ga.stand = {
-	height:80
-	,image:"stand.png"
-	,width:50
-};
+ga.stand = {height:80, image:"stand.png", width:50};
 
-var eSprite = enchant.Class.create(enchant.Sprite,{
+var eSprite = enchant.Class.create(enchant.Sprite, {
 	initialize:function(asset) {
-		enchant.Sprite.call(this,asset.width,asset.height);
+		enchant.Sprite.call(this, asset.width, asset.height);
 		this.image = game.assets[asset.image];
 		game.currentScene.addChild(this);
 	}
@@ -38,16 +22,16 @@ var eSprite = enchant.Class.create(enchant.Sprite,{
 
 var Oo3 = enchant.Class.create(eSprite,{
 	initialize:function() {
-		eSprite.call(this,ga.oo3);
+		eSprite.call(this, ga.oo3);
 		this.frame = [0, 0, 1, 1, 2, 2];
 		this.x = 70;
 		this.y = 120;
 	}
 });
 
-var Pulley = enchant.Class.create(eSprite,{
+var Pulley = enchant.Class.create(eSprite, {
 	initialize:function() {
-		eSprite.call(this,ga.pulley);
+		eSprite.call(this, ga.pulley);
 		this.x = 45;
 		this.y = 57;
 	}
@@ -57,6 +41,7 @@ var Pulley = enchant.Class.create(eSprite,{
 	}
 });
 
+
 var Stand = enchant.Class.create(eSprite,{
 	initialize:function() {
 		eSprite.call(this,ga.stand);
@@ -64,6 +49,7 @@ var Stand = enchant.Class.create(eSprite,{
 		this.y = 90;
 	}
 });
+
 
 /* 今回は使わなかった(´・ω・｀)
 var Player = enchant.Class.create(Oo3,{
@@ -86,7 +72,7 @@ var Player = enchant.Class.create(Oo3,{
 window.onload = function() {
 	game = new Core(gs.width, gs.height);
 	game.fps = gs.fps;
-	game.preload(ga.background.image,ga.oo3.image,ga.pulley.image,ga.stand.image);
+	game.preload(ga.background.image, ga.oo3.image, ga.pulley.image, ga.stand.image);
 	stage = game.rootScene;
 
 	game.onload = function() {
