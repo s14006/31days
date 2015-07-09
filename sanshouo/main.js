@@ -10,22 +10,22 @@ ga.background = {
 	,width:320
 };
 
-ga.dai = {
-	height:80
-	,image:"dai.png"
-	,width:50
-};
-
-ga.kassha = {
-	height:100
-	,image:"kassha.png"
-	,width:100
-};
-
 ga.oo3 = {
 	height:32
 	,image:"oo3.png"
 	,width:47
+};
+
+ga.pulley = {
+	height:100
+	,image:"pulley.png"
+	,width:100
+};
+
+ga.stand = {
+	height:80
+	,image:"stand.png"
+	,width:50
 };
 
 var eSprite = enchant.Class.create(enchant.Sprite,{
@@ -45,9 +45,9 @@ var Oo3 = enchant.Class.create(eSprite,{
 	}
 });
 
-var Kassha = enchant.Class.create(eSprite,{
+var Pulley = enchant.Class.create(eSprite,{
 	initialize:function() {
-		eSprite.call(this,ga.kassha);
+		eSprite.call(this,ga.pulley);
 		this.x = 45;
 		this.y = 57;
 	}
@@ -57,9 +57,9 @@ var Kassha = enchant.Class.create(eSprite,{
 	}
 });
 
-var Dai = enchant.Class.create(eSprite,{
+var Stand = enchant.Class.create(eSprite,{
 	initialize:function() {
-		eSprite.call(this,ga.dai);
+		eSprite.call(this,ga.stand);
 		this.x = 70;
 		this.y = 90;
 	}
@@ -86,15 +86,15 @@ var Player = enchant.Class.create(Oo3,{
 window.onload = function() {
 	game = new Core(gs.width, gs.height);
 	game.fps = gs.fps;
-	game.preload(ga.background.image,ga.oo3.image,ga.kassha.image,ga.dai.image);
+	game.preload(ga.background.image,ga.oo3.image,ga.pulley.image,ga.stand.image);
 	stage = game.rootScene;
 
 	game.onload = function() {
 
 		var background = new eSprite(ga.background);
 
-		var dai = new Dai();
-		var kassha = new Kassha();
+		var stand = new Stand();
+		var pulley = new Pulley();
 		var oo3 = new Oo3();
 
 	};
