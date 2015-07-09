@@ -55,6 +55,8 @@ var Pulley = enchant.Class.create({
 		group.addChild(new PulleyStand(x, y));
 		group.addChild(new PulleyBody(x, y));
 
+		node = group;
+
 		stage.addChild(group);
 	}
 });
