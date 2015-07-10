@@ -43,7 +43,7 @@
  *      var button_blue = new Button("Press me", "blue");
  *      core.rootScene.addEventListener(button);
  */
-var ui_image_path = "../images/";
+var ui_image_path = "./images/";
 /**
  * @type {Object}
  */
