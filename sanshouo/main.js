@@ -89,6 +89,13 @@ var PulleyStand = enchant.Class.create(eSprite,{
 	}
 });
 
+var Pulley = enchant.Class.create({
+	initialize:function(x, y) {
+		new PulleyStand(x, y);
+		new PulleyBody(x, y);
+	}
+});
+
 window.onload = function() {
 	game = new Core(gs.width, gs.height);
 	game.fps = gs.fps;
@@ -104,9 +111,7 @@ window.onload = function() {
 
 		var	pool = new Pool();
 
-		var pulleyStand = new PulleyStand(43, 56);
-
-		var pulleyBody = new PulleyBody(43, 56);
+		var pulley2 = new Pulley(43, 56);
 
 		var oo3 = new Oo3();
 
