@@ -61,6 +61,22 @@ var PulleyBody = enchant.Class.create(eSprite, {
 		eSprite.call(this, ga.pulleyBody);
 		this.x = 0 || x;
 		this.y = 0 || y;
+		this.pulleyRotate = false;
+	}
+
+	,onenterframe:function() {
+		if (game.input.up) {
+			this.pulleyRotate = true;
+		}
+
+		else if (game.input.down || game.input.left || game.input.right) {
+			this.pulleyRotate = false;
+		}
+
+		if (this.pulleyRotate) {
+			this.rotate(3);
+		}
+
 	}
 
 });
@@ -93,12 +109,6 @@ window.onload = function() {
 		var pulleyBody = new PulleyBody(43, 56);
 
 		var oo3 = new Oo3();
-
-		pulleyBody.on("enterframe", function() {
-			if (this.intersect(oo3)) {
-				this.rotate(3);
-			}
-		});
 
 	};
 
