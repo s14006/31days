@@ -63,9 +63,6 @@ var PulleyBody = enchant.Class.create(eSprite, {
 		this.y = 0 || y;
 	}
 
-	,onenterframe:function() {
-		this.rotate(3);
-	}
 });
 
 var PulleyStand = enchant.Class.create(eSprite,{
@@ -76,34 +73,14 @@ var PulleyStand = enchant.Class.create(eSprite,{
 	}
 });
 
-var Pulley = enchant.Class.create({
-	initialize:function(x, y) {
-		var group = new Group();
-		group.addChild(new PulleyStand(x, y));
-		group.addChild(new PulleyBody(x, y));
-
-		stage.addChild(group);
-	}
-
-});
-
-
-/* 今回は使わなかった(´・ω・｀)
-var Player = enchant.Class.create(Oo3,{
-	initialize:function() {
-		Oo3.call(this);
-	}
-
-	
-});
-
-*/
-
-
 window.onload = function() {
 	game = new Core(gs.width, gs.height);
 	game.fps = gs.fps;
-	game.preload(ga.background.image, ga.pool.image, ga.oo3.image, ga.pulleyBody.image, ga.stand.image);
+	game.preload(ga.background.image
+		,ga.pool.image
+		,ga.oo3.image
+		,ga.pulleyBody.image
+		,ga.stand.image);
 	stage = game.rootScene;
 
 	game.onload = function() {
@@ -111,10 +88,17 @@ window.onload = function() {
 
 		var	pool = new Pool();
 
-		var pulley = new Pulley(43, 56);
+		var pulleyStand = new PulleyStand(43, 56);
+
+		var pulleyBody = new PulleyBody(43, 56);
 
 		var oo3 = new Oo3();
 
+		pulleyBody.on("enterframe", function() {
+			if (this.intersect(oo3)) {
+				this.rotate(3);
+			}
+		});
 
 	};
 
