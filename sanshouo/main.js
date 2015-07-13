@@ -4,15 +4,19 @@ var gs = {fps:30, height:320, width:320};
 
 var ga = {};
 
-ga.background = {height:320, image:"background.png", width:320};
+ga.background = {height:320, image:"./background.png", width:320};
 
-ga.pool = {height:120, image:"pool.png", width:140};
+ga.button1 = {height:50, image:"./button1.png", width:50};
 
-ga.oo3 = {height:32, image:"oo3.png", width:47};
+ga.button2 = {height:50, image:"./button2.png", width:50};
 
-ga.pulleyBody = {height:100, image:"pulley.png", width:100};
+ga.pool = {height:120, image:"./pool.png", width:140};
 
-ga.stand = {height:80, image:"stand.png", width:50};
+ga.oo3 = {height:32, image:"./oo3.png", width:47};
+
+ga.pulleyBody = {height:100, image:"./pulley.png", width:100};
+
+ga.stand = {height:80, image:"./stand.png", width:50};
 
 var eSprite = enchant.Class.create(enchant.Sprite, {
 	initialize:function(asset) {
@@ -22,11 +26,25 @@ var eSprite = enchant.Class.create(enchant.Sprite, {
 	}
 });
 
-var Pool = enchant.Class.create(eSprite, {
+var Increase = enchant.Class.create(eSprite, {
 	initialize:function() {
-		eSprite.call(this, ga.pool);
-		this.x = gs.width - this.width;
-		this.y = gs.height - this.height - 25;
+		eSprite.call(this, ga.button1);
+		this.opacity = 0.7;
+		this.x = 5;
+		this.y = gs.height - this.height - 5;
+	}
+
+	,ontouchend:function() {
+		new Oo3Image();
+	}
+});
+
+var Reduce = enchant.Class.create(eSprite, {
+	initialize:function() {
+		eSprite.call(this, ga.button2);
+		this.opacity = 0.7;
+		this.x = 60;
+		this.y = gs.height - this.height - 5;
 	}
 });
 
@@ -56,7 +74,24 @@ var Oo3 = enchant.Class.create(eSprite,{
 	}
 });
 
-var PulleyBody = enchant.Class.create(eSprite, {
+var Oo3Image = enchant.Class.create(eSprite, {
+	initialize:function(x, y) {
+		eSprite.call(this, ga.oo3);
+		this.x = Math.random()*(gs.width - this.width);
+		this.y = Math.random()*(gs.height - this.height);
+		this.frame = 0;
+	}
+});
+
+var Pool = enchant.Class.create(eSprite, {
+	initialize:function() {
+		eSprite.call(this, ga.pool);
+		this.x = gs.width - this.width;
+		this.y = gs.height - this.height - 25;
+	}
+});
+
+var PulleyBody = enchant.Class.create(eSprite,{
 	initialize:function(x, y) {
 		eSprite.call(this, ga.pulleyBody);
 		this.x = 0 || x;
@@ -76,9 +111,7 @@ var PulleyBody = enchant.Class.create(eSprite, {
 		if (this.pulleyRotate) {
 			this.rotate(3);
 		}
-
 	}
-
 });
 
 var PulleyStand = enchant.Class.create(eSprite,{
@@ -100,6 +133,8 @@ window.onload = function() {
 	game = new Core(gs.width, gs.height);
 	game.fps = gs.fps;
 	game.preload(ga.background.image
+		,ga.button1.image
+		,ga.button2.image
 		,ga.pool.image
 		,ga.oo3.image
 		,ga.pulleyBody.image
@@ -109,9 +144,13 @@ window.onload = function() {
 	game.onload = function() {
 		var backgrund = new eSprite(ga.background);
 
+		var button1 = new Increase();
+
+		var button2 = new Reduce();
+
 		var	pool = new Pool();
 
-		var pulley2 = new Pulley(43, 56);
+		var pulley = new Pulley(43, 56);
 
 		var oo3 = new Oo3();
 
