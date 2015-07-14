@@ -50,12 +50,14 @@ var Oo3 = enchant.Class.create(eSprite,{
 			this.y = 210;
 			this.frame = [3, 3, 3, 3, 4, 4, 4, 4];
 		}
+
 		else if (game.input.left || game.input.down) {
 			this.x = 70;
 			this.y = 200;
 			this.frame = 0;
 		}
-		else if (game.input.up) {
+	
+			else if (game.input.up) {
 			this.x = 68;
 			this.y = 120;
 			this.frame = [0, 0, 1, 1, 2, 2];
@@ -73,9 +75,8 @@ var Oo3Image = enchant.Class.create(eSprite, {
 
 	,onenterframe:function() {
 		this.x += 3;
-
-		if (this.x >= 200 && this.y >= 180 && this.y <= 260) {
-			this.frame = [3, 4];
+		if (this.x >= 200 && this.y >= 170 && this.y <= 250 && this.frame < 3) {
+			this.frame = [3, 3, 3, 4, 4, 4];
 		}
 
 		if (this.x >= gs.width) {
