@@ -6,9 +6,7 @@ var ga = {};
 
 ga.background = {height:320, image:"./background.png", width:320};
 
-ga.button1 = {height:50, image:"./button1.png", width:50};
-
-ga.button2 = {height:50, image:"./button2.png", width:50};
+ga.button = {height:50, image:"./button.png", width:50};
 
 ga.pool = {height:120, image:"./pool.png", width:140};
 
@@ -28,7 +26,7 @@ var eSprite = enchant.Class.create(enchant.Sprite, {
 
 var Increase = enchant.Class.create(eSprite, {
 	initialize:function() {
-		eSprite.call(this, ga.button1);
+		eSprite.call(this, ga.button);
 		this.opacity = 0.7;
 		this.x = 5;
 		this.y = gs.height - this.height - 5;
@@ -36,15 +34,6 @@ var Increase = enchant.Class.create(eSprite, {
 
 	,ontouchend:function() {
 		new Oo3Image();
-	}
-});
-
-var Reduce = enchant.Class.create(eSprite, {
-	initialize:function() {
-		eSprite.call(this, ga.button2);
-		this.opacity = 0.7;
-		this.x = 60;
-		this.y = gs.height - this.height - 5;
 	}
 });
 
@@ -78,9 +67,22 @@ var Oo3Image = enchant.Class.create(eSprite, {
 	initialize:function(x, y) {
 		eSprite.call(this, ga.oo3);
 		this.x = Math.random()*(gs.width - this.width);
-		this.y = Math.random()*(gs.height - this.height);
-		this.frame = 0;
+		this.y = Math.random()*(gs.height - 120 - this.height) + 120;
+		this.frame = [0, 0, 1, 1, 2, 2];
 	}
+
+	,onenterframe:function() {
+		this.x += 3;
+
+		if (this.x >= 200 && this.y >= 180 && this.y <= 260) {
+			this.frame = [3, 4];
+		}
+
+		if (this.x >= gs.width) {
+			this.remove();
+		}
+	}
+
 });
 
 var Pool = enchant.Class.create(eSprite, {
@@ -133,8 +135,7 @@ window.onload = function() {
 	game = new Core(gs.width, gs.height);
 	game.fps = gs.fps;
 	game.preload(ga.background.image
-		,ga.button1.image
-		,ga.button2.image
+		,ga.button.image
 		,ga.pool.image
 		,ga.oo3.image
 		,ga.pulleyBody.image
@@ -144,9 +145,7 @@ window.onload = function() {
 	game.onload = function() {
 		var backgrund = new eSprite(ga.background);
 
-		var button1 = new Increase();
-
-		var button2 = new Reduce();
+		var button = new Increase();
 
 		var	pool = new Pool();
 
