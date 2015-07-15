@@ -2,13 +2,13 @@ enchant();
 
 var gs = {fps:30, height:320, width:320};
 
+gs.assets = {};
+
 var ga = {};
 
 ga.background = {height:320, image:"./background.png", width:320};
 
 ga.button = {height:50, image:"./button.png", width:50};
-
-ga.pool = {height:120, image:"./pool.png", width:140};
 
 ga.oo3 = {height:32, image:"./oo3.png", width:47};
 
@@ -28,8 +28,8 @@ var Increase = enchant.Class.create(eSprite, {
 	initialize:function() {
 		eSprite.call(this, ga.button);
 		this.opacity = 0.7;
-		this.x = 5;
-		this.y = gs.height - this.height - 5;
+		this.x = gs.width - this.width - 5;
+		this.y = 5;
 	}
 
 	,ontouchend:function() {
@@ -86,14 +86,6 @@ var Oo3Image = enchant.Class.create(eSprite, {
 
 });
 
-var Pool = enchant.Class.create(eSprite, {
-	initialize:function() {
-		eSprite.call(this, ga.pool);
-		this.x = gs.width - this.width;
-		this.y = gs.height - this.height - 25;
-	}
-});
-
 var PulleyBody = enchant.Class.create(eSprite,{
 	initialize:function(x, y) {
 		eSprite.call(this, ga.pulleyBody);
@@ -132,27 +124,43 @@ var Pulley = enchant.Class.create({
 	}
 });
 
+// Pad用アセット
+gs.assets.pad  = {path:"./pad.png"};
+gs.assets.apad = {path:"./apad.png"};
+gs.assets.font0 = {path:"./font0.png"};
+gs.assets.icon0 = {path:"./icon0.png"};
+
+// Game Pad
+var ePad = enchant.Class.create(enchant.ui.Pad,{
+	initialize:function(){
+		enchant.ui.Pad.call(this);
+		this.x = 0;
+		this.y = 220;
+	}
+});
+
+
 window.onload = function() {
 	game = new Core(gs.width, gs.height);
 	game.fps = gs.fps;
 	game.preload(ga.background.image
 		,ga.button.image
-		,ga.pool.image
 		,ga.oo3.image
 		,ga.pulleyBody.image
 		,ga.stand.image);
 	stage = game.rootScene;
 
 	game.onload = function() {
+
 		var backgrund = new eSprite(ga.background);
 
 		var button = new Increase();
 
-		var	pool = new Pool();
-
 		var pulley = new Pulley(43, 56);
 
 		var oo3 = new Oo3();
+
+		stage.addChild(new ePad());
 
 	};
 

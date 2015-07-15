@@ -8,7 +8,7 @@ CrossKey = enchant.Class.create(enchant.ui.Pad,{
   initialize:function(){
     enchant.ui.Pad.call(this);
     this.x = 0;
-    this.y = gsettings.height - this.height;
+    this.y = gs.height - this.height;
     game.currentScene.addChild(this);
   }
 });
