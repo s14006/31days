@@ -6,15 +6,15 @@ gs.assets = {};
 
 var ga = {};
 
-ga.background = {height:320, image:"./background.png", width:320};
+ga.background = {height:320, image:"./images/background.png", width:320};
 
-ga.button = {height:50, image:"./button.png", width:50};
+ga.button = {height:50, image:"./images/button.png", width:50};
 
-ga.oo3 = {height:32, image:"./oo3.png", width:47};
+ga.oo3 = {height:32, image:"./images/oo3.png", width:47};
 
-ga.pulleyBody = {height:100, image:"./pulley.png", width:100};
+ga.pulleyBody = {height:100, image:"./images/pulley.png", width:100};
 
-ga.stand = {height:80, image:"./stand.png", width:50};
+ga.stand = {height:80, image:"./images/stand.png", width:50};
 
 var eSprite = enchant.Class.create(enchant.Sprite, {
 	initialize:function(asset) {
@@ -66,7 +66,7 @@ var Oo3 = enchant.Class.create(eSprite,{
 });
 
 var Oo3Image = enchant.Class.create(eSprite, {
-	initialize:function(x, y) {
+	initialize:function() {
 		eSprite.call(this, ga.oo3);
 		this.x = Math.random()*(gs.width - this.width);
 		this.y = Math.random()*(gs.height - 120 - this.height) + 120;
