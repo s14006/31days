@@ -31,10 +31,6 @@ var Increase = enchant.Class.create(eSprite, {
 		this.x = gs.width - this.width - 5;
 		this.y = 5;
 	}
-
-	,ontouchend:function() {
-		new Oo3Image();
-	}
 });
 
 var Oo3 = enchant.Class.create(eSprite,{
@@ -57,7 +53,7 @@ var Oo3 = enchant.Class.create(eSprite,{
 			this.frame = 0;
 		}
 	
-			else if (game.input.up) {
+		else if (game.input.up) {
 			this.x = 68;
 			this.y = 120;
 			this.frame = [0, 0, 1, 1, 2, 2];
