@@ -31,6 +31,10 @@ var Increase = enchant.Class.create(eSprite, {
 		this.x = gs.width - this.width - 5;
 		this.y = 5;
 	}
+
+	,ontouchend:function() {
+		new Oo3Image();
+	}
 });
 
 var Oo3 = enchant.Class.create(eSprite,{
