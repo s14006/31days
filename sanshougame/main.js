@@ -19,23 +19,29 @@ var Oo3 = enchant.Class.create(eSprite, {
 		eSprite.call(this, ga.oo3);
 		this.x = (gs.width - this.width) /2;
 		this.y = 200;
+		this.frame = 0;
 	}
 
 	,onenterframe:function() {
 		if (game.input.up) {
 			this.y -= 3;
+			this.frame = [0, 0, 1, 1, 2, 2];
+
 		}
 
 		else if (game.input.down) {
 			this.y += 3;
+			this.frame = 1;
 		}
 
 		else if (game.input.left) {
 			this.x -= 3;
+			this.frame = [0, 0, 1, 1, 2, 2];
 		}
 
 		else if (game.input.right){
 			this.x += 3;
+			this.frame = [0, 0, 1, 1, 2, 2];
 		}
 	}
 });
