@@ -25,18 +25,32 @@ var Oo3 = enchant.Class.create(eSprite, {
 	,onenterframe:function() {
 		if (game.input.up) {
 			this.y -= 2;
+			if (this.y <= 0) {
+				this.y += 2;
+			}
 		}
 
 		else if (game.input.down) {
 			this.y += 2;
+			if (this.y >= gs.height - this.height) {
+				this.y -= 2;
+			}
 		}
 
 		else if (game.input.left) {
 			this.x -= 3;
+			this.scaleX = -1;
+			if (this.x <= 0) {
+				this.x += 3;
+			}
 		}
 
 		else if (game.input.right){
 			this.x += 3;
+			this.scaleX = 1;
+			if (this.x >= gs.width - this.width) {
+				this.x -= 3;
+			}
 		}
 	}
 });
