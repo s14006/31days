@@ -18,7 +18,7 @@ var Oo3 = enchant.Class.create(eSprite, {
 	initialize:function() {
 		eSprite.call(this, ga.oo3);
 		this.x = (gs.width - this.width) /2;
-		this.y = 200;
+		this.y = (gs.height - (this.height + 100));
 		this.frame = 1;
 	}
 
@@ -32,7 +32,7 @@ var Oo3 = enchant.Class.create(eSprite, {
 
 		else if (game.input.down) {
 			this.y += 2;
-			if (this.y >= gs.height - this.height) {
+			if (this.y >= gs.height - (this.height + 100)) {
 				this.y -= 2;
 			}
 		}
