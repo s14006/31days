@@ -6,6 +6,8 @@ var ga = {};
 
 ga.background = {height:320, image:"./images/background.png", width:320};
 
+ga.enemy = {height:32, image:"./images/chara2.png", width:32};
+
 ga.oo3 = {height:32, image:"./images/oo3.png", width:47};
 
 var eSprite = enchant.Class.create(enchant.Sprite, {
@@ -27,7 +29,7 @@ var Oo3 = enchant.Class.create(eSprite, {
 		eSprite.call(this, ga.oo3);
 		this.x = (gs.width - this.width) /2;
 		this.y = (gs.height - (this.height + 100));
-		this.frame = 1;
+		this.frame = [0, 0, 1, 1, 2, 2];
 	}
 
 	,onenterframe:function() {
@@ -64,13 +66,26 @@ var Oo3 = enchant.Class.create(eSprite, {
 });
 
 var Enemy = enchant.Class.create(eSprite, {
+	initialize:function() {
+		eSprite.call(this, ga.enemy);
+		this.x = gs.width;
+		this.y = Math.random() * (gs.height - this.height);
+		this.frame = [0, 0, 1, 1, 2, 2];
+	}
 
+	,onenterframe:function() {
+		this.x -= 5;
+
+		if (this.x <= -32) {
+			this.remove();
+		}
+	}
 });
 
 window.onload = function() {
 	game = new Core(gs.width, gs.height);
 	game.fps = gs.fps;
-	game.preload(ga.oo3.image, ga.background.image);
+	game.preload(ga.oo3.image, ga.background.image, ga.enemy.image);
 	stage = game.rootScene;
 
 	game.onload = function() {
@@ -78,6 +93,15 @@ window.onload = function() {
 		var background = new BGimage();
 
 		var oo3 = new Oo3();
+ 
+		var enemy = new Enemy();
+
+		var enemis = [];
+		stage.on('enterframe', function() {
+			if (this.age % (gs.fps * 0.5) === 0) {
+				enemis.push(new Enemy());
+			}
+		});
 	};
 
 	game.start();
