@@ -10,6 +10,8 @@ ga.background = {height:320, image:"./images/background.png", width:320};
 
 ga.enemy = {height:16, image:"./images/icon1.png", width:16};
 
+ga.fruit = {height:16, image:"./images/icon0.png", width:16};
+
 ga.oo3 = {height:32, image:"./images/oo3.png", width:47};
 
 var eSprite = enchant.Class.create(enchant.Sprite, {
@@ -83,13 +85,36 @@ var Enemy = enchant.Class.create(eSprite, {
 	}
 });
 
+var Fruit = enchant.Class.create(eSprite, {
+	initialize:function() {
+		eSprite.call(this, ga.fruit);
+		this.x = gs.width;
+		this.y = Math.random() * (gs.height - this.height);
+		this.frame = 15;
+	}
+
+	,onenterframe:function() {
+		this.x -= 8;
+		this.rotate(-5);
+
+		if (this.x <= -16) {
+			this.remove();
+		}
+
+		if (this.intersect(oo3)) {
+			this.remove();
+			game.score += 1;
+		}
+	}
+});
+
 // Pad用アセット
 gs.assets.pad  = {path:"./pad.png"};
 gs.assets.apad = {path:"./apad.png"};
 gs.assets.font0 = {path:"./font0.png"};
 gs.assets.icon0 = {path:"./icon0.png"};
 
-// Game Pad
+// Game Pa
 var ePad = enchant.Class.create(enchant.ui.Pad,{
 	initialize:function(){
 		enchant.ui.Pad.call(this);
@@ -97,14 +122,15 @@ var ePad = enchant.Class.create(enchant.ui.Pad,{
 		this.y = 220;
 	}
 });
-
 window.onload = function() {
 	game = new Core(gs.width, gs.height);
 	game.fps = gs.fps;
-	game.preload(ga.oo3.image, ga.background.image, ga.enemy.image);
+	game.preload(ga.oo3.image, ga.background.image, ga.enemy.image, ga.fruit.image);
 	stage = game.rootScene;
 
 	game.onload = function() {
+
+		game.score = 0;
 
 		var background = new eSprite(ga.background);
 
@@ -112,10 +138,16 @@ window.onload = function() {
 
 		stage.addChild(new ePad());
 
+
 		var enemis = [];
+		var fruits = [];
 		stage.on('enterframe', function() {
 			if (this.age % (gs.fps * 0.5) === 0) {
 				enemis.push(new Enemy());
+			}
+
+			if (this.age % (gs.fps * 0.8) === 0) {
+				fruits.push(new Fruit());
 			}
 		});
 	};
