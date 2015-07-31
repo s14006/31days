@@ -2,13 +2,61 @@ enchant();
 
 var gs = {fps:30, height:320, width:320};
 
+var ga = {};
+
+ga.background = {height:320, image:"./images/background.png", width:320};
+
+ga.enemy = {height:16, image:"./images/icon1.png", width:16};
+
+ga.fruit = {height:16, image:"./images/icon0.png", width:16};
+
+ga.oo3 = {height:32, image:"./images/oo3.png", width:47};
+
+ga.startImage = {height:48, image:"./start.png", width:236};
+
+ga.endImage = {height:97, image:"./end.png", width:189};
+
+var BackgroundImage = function() {
+	backgroundImage = new Sprite(ga.background.width, ga.background.height);
+	backgroundImage.image = ga.background.image;
+}
+
+
 window.onload = function() {
 	game = new Core(gs.width, gs.height);
 	game.fps = gs.fps;
+	game.preload(ga.background.image,
+				 ga.startImage.image,
+				 ga.oo3.image,
+				 ga.enemy.image,
+				 ga.fruit.image,
+				 ga.endImage.image);
+	stage = game.rootScene;
 
 	game.onload = function() {
 
+		var createStartScene = function() {
+            var scene = new Scene();                                
+            scene.background = new BackgroundImage();                     
+            var startImage = new Sprite(ga.startImage.width, ga.startImage.height);     
+
+            startImage.image = ga.startImage.image;     
+            startImage.x = (gs.width - this.width) /2;                                      
+            startImage.y = (gs.height - this.height) / 2;                                     
+            scene.addChild(startImage);                             
+            
+           /* startImage.addEventListener(Event.TOUCH_START, function(e) {
+                game_.replaceScene(createGameScene());    
+            });
+            書き方変えるの難しい…(；´∀｀)
+
+*/
+            
+            return scene;
+        };
 	};
+
+	game.start();
 
 };
 

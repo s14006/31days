@@ -14,6 +14,8 @@ ga.fruit = {height:16, image:"./images/icon0.png", width:16};
 
 ga.oo3 = {height:32, image:"./images/oo3.png", width:47};
 
+ga.end = {height:97, image:"./end.png", width:189};
+
 var eSprite = enchant.Class.create(enchant.Sprite, {
 	initialize:function(asset) {
 		enchant.Sprite.call(this, asset.width, asset.height);
@@ -142,7 +144,8 @@ window.onload = function() {
 	game.preload(ga.oo3.image,
 				 ga.background.image,
 				 ga.enemy.image,
-				 ga.fruit.image);
+				 ga.fruit.image,
+				 ga.end.image);
 	stage = game.rootScene;
 
 	game.onload = function() {
