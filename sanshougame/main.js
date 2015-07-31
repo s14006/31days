@@ -1,3 +1,4 @@
+
 enchant();
 
 var gs = {fps:30, height:320, width:320};
@@ -13,8 +14,6 @@ ga.enemy = {height:16, image:"./images/icon1.png", width:16};
 ga.fruit = {height:16, image:"./images/icon0.png", width:16};
 
 ga.oo3 = {height:32, image:"./images/oo3.png", width:47};
-
-ga.end = {height:97, image:"./end.png", width:189};
 
 var eSprite = enchant.Class.create(enchant.Sprite, {
 	initialize:function(asset) {
@@ -83,6 +82,7 @@ var Enemy = enchant.Class.create(eSprite, {
 
 		if (this.intersect(oo3)) {
 			game.end();
+			var retry = new Retry();
 		}
 	}
 });
@@ -123,6 +123,22 @@ var Score = enchant.Class.create(enchant.Label, {
 	}
 });
 
+var Retry = enchant.Class.create(enchant.Label, {
+	initialize:function() {
+		enchant.Label.call(this);
+		this.color = "black";
+		this.font = "bold 16pt sans-serif";
+		this.text = "リトライ";
+		this.textAlign = "center";
+		this.y = 260;
+		game.currentScene.addChild(this);
+	}
+
+	,ontouchend:function() {
+		location.reload();
+	}
+});
+
 // Pad用アセット
 gs.assets.pad  = {path:"./pad.png"};
 gs.assets.apad = {path:"./apad.png"};
@@ -144,8 +160,7 @@ window.onload = function() {
 	game.preload(ga.oo3.image,
 				 ga.background.image,
 				 ga.enemy.image,
-				 ga.fruit.image,
-				 ga.end.image);
+				 ga.fruit.image);
 	stage = game.rootScene;
 
 	game.onload = function() {
@@ -175,3 +190,4 @@ window.onload = function() {
 
 	game.start();
 };
+
